@@ -1,0 +1,1366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HRSystemDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="HR_AttendanceRegister">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Id" Type="int" Nullable="false" />
+          <Property Name="AttendanceDate" Type="date" Nullable="false" />
+          <Property Name="TimeIN" Type="smalldatetime" />
+          <Property Name="TimeOUT" Type="smalldatetime" />
+          <Property Name="note" Type="varchar" MaxLength="150" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="300" />
+          <Property Name="Absent" Type="bit" />
+        </EntityType>
+        <EntityType Name="HR_ContactType">
+          <Key>
+            <PropertyRef Name="ContactTypeID" />
+          </Key>
+          <Property Name="ContactTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HR_Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="50" />
+          <Property Name="isactive" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_EmployeeContact">
+          <Key>
+            <PropertyRef Name="contactID" />
+          </Key>
+          <Property Name="contactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="8" />
+          <Property Name="ContactTypeID" Type="int" Nullable="false" />
+          <Property Name="EMP_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_LeaveType">
+          <Key>
+            <PropertyRef Name="LeaveTypeID" />
+          </Key>
+          <Property Name="LeaveTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LTname" Type="varchar" MaxLength="50" />
+          <Property Name="isactive" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_tbl_ApprovedLeave">
+          <Key>
+            <PropertyRef Name="ApprovedLeaveID" />
+          </Key>
+          <Property Name="ApprovedLeaveID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveFrom" Type="date" />
+          <Property Name="Leaveto" Type="date" />
+          <Property Name="LeavetypeID" Type="int" />
+          <Property Name="daterequested" Type="date" />
+          <Property Name="recommended" Type="varchar" MaxLength="3" />
+          <Property Name="approvedBy" Type="int" />
+          <Property Name="medicalrequired" Type="varchar" MaxLength="3" />
+          <Property Name="medicalForm" Type="varchar" MaxLength="50" />
+          <Property Name="isactive" Type="int" />
+          <Property Name="EMP_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_tbl_Emp_Leave">
+          <Key>
+            <PropertyRef Name="EMP_ID" />
+          </Key>
+          <Property Name="EMP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpStatus_ID" Type="int" />
+          <Property Name="LeavetypeID" Type="int" />
+          <Property Name="Leave_limit" Type="int" />
+          <Property Name="Leave_used" Type="int" />
+          <Property Name="PeriodStart" Type="date" />
+          <Property Name="PeriodEnd" Type="date" />
+          <Property Name="isactive" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_tbl_Employee">
+          <Key>
+            <PropertyRef Name="EMP_ID" />
+          </Key>
+          <Property Name="EMP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" />
+          <Property Name="Lastname" Type="varchar" MaxLength="50" />
+          <Property Name="gender" Type="int" />
+          <Property Name="contactID" Type="int" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="Estatus" Type="int" />
+          <Property Name="PosID" Type="int" />
+          <Property Name="dateJoin" Type="date" />
+          <Property Name="dateLeave" Type="date" />
+          <Property Name="ServiceYears" Type="int" />
+          <Property Name="ReportingManager" Type="int" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="createdBy" Type="varchar" MaxLength="50" />
+          <Property Name="modifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="modifiedDate" Type="datetime" />
+          <Property Name="isactive" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_tbl_employmentStatus">
+          <Key>
+            <PropertyRef Name="EmpStatus_ID" />
+          </Key>
+          <Property Name="EmpStatus_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estatus" Type="varchar" MaxLength="50" />
+          <Property Name="isactive" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_tbl_Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="isactive" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_tbl_Position">
+          <Key>
+            <PropertyRef Name="Pos_ID" />
+          </Key>
+          <Property Name="Pos_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pos_Name" Type="varchar" MaxLength="50" />
+          <Property Name="PositionSalary" Type="money" />
+          <Property Name="createdBy" Type="varchar" MaxLength="50" />
+          <Property Name="modifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="isActive" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_tbl_ROP_report">
+          <Key>
+            <PropertyRef Name="ROP_ID" />
+          </Key>
+          <Property Name="ROP_ID" Type="int" Nullable="false" />
+          <Property Name="EmpID" Type="int" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="DaysPresent" Type="int" />
+          <Property Name="DaysAbsent" Type="int" />
+          <Property Name="isactive" Type="int" />
+        </EntityType>
+        <EntityType Name="HR_tbl_SummaryReport">
+          <Key>
+            <PropertyRef Name="Report_ID" />
+          </Key>
+          <Property Name="Report_ID" Type="int" Nullable="false" />
+          <Property Name="EmpId" Type="int" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="SL_thismonth" Type="int" />
+          <Property Name="SL_broughtforward" Type="int" />
+          <Property Name="SL_total" Type="int" />
+          <Property Name="CL_thismonth" Type="int" />
+          <Property Name="CL_broughtforward" Type="int" />
+          <Property Name="CL_total" Type="int" />
+          <Property Name="TL_thismonth" Type="int" />
+          <Property Name="TL_broughtforward" Type="int" />
+          <Property Name="TL_total" Type="int" />
+          <Property Name="ML_thismonth" Type="int" />
+          <Property Name="ML_broughtforward" Type="int" />
+          <Property Name="ML_total" Type="int" />
+          <Property Name="remarks" Type="varchar" MaxLength="50" />
+          <Property Name="isactive" Type="int" />
+          <Property Name="confirmed" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="HR_tbl_TakenLeave">
+          <Key>
+            <PropertyRef Name="TakenLeaveID" />
+          </Key>
+          <Property Name="TakenLeaveID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeaveTypeID" Type="int" />
+          <Property Name="isactive" Type="int" />
+          <Property Name="EMP_ID" Type="int" />
+          <Property Name="start_date" Type="datetime" />
+          <Property Name="end_date" Type="datetime" />
+          <Property Name="LeaveDate" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_val_sex">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sex" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_department">
+          <End Role="HR_Department" Type="Self.HR_Department" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpLeave">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_tbl_Emp_Leave" Type="Self.HR_tbl_Emp_Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Emp_Leave">
+              <PropertyRef Name="EmpStatus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_tbl_SummaryReport" Type="Self.HR_tbl_SummaryReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_SummaryReport">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeContact">
+          <End Role="HR_EmployeeContact" Type="Self.HR_EmployeeContact" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_EmployeeContact">
+              <PropertyRef Name="contactID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="contactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_gender">
+          <End Role="tbl_val_sex" Type="Self.tbl_val_sex" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_val_sex">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_Approvedleave">
+          <End Role="HR_LeaveType" Type="Self.HR_LeaveType" Multiplicity="0..1" />
+          <End Role="HR_tbl_ApprovedLeave" Type="Self.HR_tbl_ApprovedLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="HR_tbl_ApprovedLeave">
+              <PropertyRef Name="LeavetypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_AttendanceRegisterEmployee">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="1" />
+          <End Role="HR_AttendanceRegister" Type="Self.HR_AttendanceRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_AttendanceRegister">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_Employee">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_tbl_ROP_report" Type="Self.HR_tbl_ROP_report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_ROP_report">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_Employee_Manager">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee1" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee1">
+              <PropertyRef Name="ReportingManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_EmployeeContact_HR_ContactType">
+          <End Role="HR_ContactType" Type="Self.HR_ContactType" Multiplicity="1" />
+          <End Role="HR_EmployeeContact" Type="Self.HR_EmployeeContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_ContactType">
+              <PropertyRef Name="ContactTypeID" />
+            </Principal>
+            <Dependent Role="HR_EmployeeContact">
+              <PropertyRef Name="ContactTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_EmployeeContact_HR_tbl_Employee">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_EmployeeContact" Type="Self.HR_EmployeeContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_EmployeeContact">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_EmployeeStatus">
+          <End Role="HR_tbl_employmentStatus" Type="Self.HR_tbl_employmentStatus" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_employmentStatus">
+              <PropertyRef Name="EmpStatus_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="Estatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_tbl_ApprovedLeave_HR_tbl_Employee">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_tbl_ApprovedLeave" Type="Self.HR_tbl_ApprovedLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_ApprovedLeave">
+              <PropertyRef Name="approvedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_tbl_department">
+          <End Role="HR_Department" Type="Self.HR_Department" Multiplicity="0..1" />
+          <End Role="HR_tbl_ROP_report" Type="Self.HR_tbl_ROP_report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="HR_tbl_ROP_report">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_tbl_Location">
+          <End Role="HR_tbl_Location" Type="Self.HR_tbl_Location" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_tbl_TakenLeave_HR_LeaveType">
+          <End Role="HR_LeaveType" Type="Self.HR_LeaveType" Multiplicity="0..1" />
+          <End Role="HR_tbl_TakenLeave" Type="Self.HR_tbl_TakenLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="HR_tbl_TakenLeave">
+              <PropertyRef Name="LeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveType">
+          <End Role="HR_LeaveType" Type="Self.HR_LeaveType" Multiplicity="0..1" />
+          <End Role="HR_tbl_Emp_Leave" Type="Self.HR_tbl_Emp_Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Emp_Leave">
+              <PropertyRef Name="LeavetypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position">
+          <End Role="HR_tbl_Position" Type="Self.HR_tbl_Position" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Position">
+              <PropertyRef Name="Pos_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="PosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_summaryDepartment">
+          <End Role="HR_Department" Type="Self.HR_Department" Multiplicity="0..1" />
+          <End Role="HR_tbl_SummaryReport" Type="Self.HR_tbl_SummaryReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="HR_tbl_SummaryReport">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_val_sex_tbl_val_sex">
+          <End Role="tbl_val_sex" Type="Self.tbl_val_sex" Multiplicity="1" />
+          <End Role="tbl_val_sex1" Type="Self.tbl_val_sex" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_val_sex">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="tbl_val_sex1">
+              <PropertyRef Name="sid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spGetDeptAttendance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="deptID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="HRSystemDBModelStoreContainer">
+          <EntitySet Name="HR_AttendanceRegister" EntityType="Self.HR_AttendanceRegister" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_ContactType" EntityType="Self.HR_ContactType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_Department" EntityType="Self.HR_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_EmployeeContact" EntityType="Self.HR_EmployeeContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_LeaveType" EntityType="Self.HR_LeaveType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_ApprovedLeave" EntityType="Self.HR_tbl_ApprovedLeave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_Emp_Leave" EntityType="Self.HR_tbl_Emp_Leave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_Employee" EntityType="Self.HR_tbl_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_employmentStatus" EntityType="Self.HR_tbl_employmentStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_Location" EntityType="Self.HR_tbl_Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_Position" EntityType="Self.HR_tbl_Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_ROP_report" EntityType="Self.HR_tbl_ROP_report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_SummaryReport" EntityType="Self.HR_tbl_SummaryReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_tbl_TakenLeave" EntityType="Self.HR_tbl_TakenLeave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_val_sex" EntityType="Self.tbl_val_sex" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_department" Association="Self.FK_department">
+            <End Role="HR_Department" EntitySet="HR_Department" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpLeave" Association="Self.FK_EmpLeave">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_Emp_Leave" EntitySet="HR_tbl_Emp_Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee" Association="Self.FK_Employee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_SummaryReport" EntitySet="HR_tbl_SummaryReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeContact" Association="Self.FK_EmployeeContact">
+            <End Role="HR_EmployeeContact" EntitySet="HR_EmployeeContact" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_gender" Association="Self.FK_gender">
+            <End Role="tbl_val_sex" EntitySet="tbl_val_sex" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_Approvedleave" Association="Self.FK_HR_Approvedleave">
+            <End Role="HR_LeaveType" EntitySet="HR_LeaveType" />
+            <End Role="HR_tbl_ApprovedLeave" EntitySet="HR_tbl_ApprovedLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_AttendanceRegisterEmployee" Association="Self.FK_HR_AttendanceRegisterEmployee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_AttendanceRegister" EntitySet="HR_AttendanceRegister" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_Employee" Association="Self.FK_HR_Employee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_ROP_report" EntitySet="HR_tbl_ROP_report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_Employee_Manager" Association="Self.FK_HR_Employee_Manager">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_Employee1" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_EmployeeContact_HR_ContactType" Association="Self.FK_HR_EmployeeContact_HR_ContactType">
+            <End Role="HR_ContactType" EntitySet="HR_ContactType" />
+            <End Role="HR_EmployeeContact" EntitySet="HR_EmployeeContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_EmployeeContact_HR_tbl_Employee" Association="Self.FK_HR_EmployeeContact_HR_tbl_Employee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_EmployeeContact" EntitySet="HR_EmployeeContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_EmployeeStatus" Association="Self.FK_HR_EmployeeStatus">
+            <End Role="HR_tbl_employmentStatus" EntitySet="HR_tbl_employmentStatus" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_tbl_ApprovedLeave_HR_tbl_Employee" Association="Self.FK_HR_tbl_ApprovedLeave_HR_tbl_Employee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_ApprovedLeave" EntitySet="HR_tbl_ApprovedLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_tbl_department" Association="Self.FK_HR_tbl_department">
+            <End Role="HR_Department" EntitySet="HR_Department" />
+            <End Role="HR_tbl_ROP_report" EntitySet="HR_tbl_ROP_report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_tbl_Location" Association="Self.FK_HR_tbl_Location">
+            <End Role="HR_tbl_Location" EntitySet="HR_tbl_Location" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_tbl_TakenLeave_HR_LeaveType" Association="Self.FK_HR_tbl_TakenLeave_HR_LeaveType">
+            <End Role="HR_LeaveType" EntitySet="HR_LeaveType" />
+            <End Role="HR_tbl_TakenLeave" EntitySet="HR_tbl_TakenLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveType" Association="Self.FK_LeaveType">
+            <End Role="HR_LeaveType" EntitySet="HR_LeaveType" />
+            <End Role="HR_tbl_Emp_Leave" EntitySet="HR_tbl_Emp_Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position" Association="Self.FK_position">
+            <End Role="HR_tbl_Position" EntitySet="HR_tbl_Position" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_summaryDepartment" Association="Self.FK_summaryDepartment">
+            <End Role="HR_Department" EntitySet="HR_Department" />
+            <End Role="HR_tbl_SummaryReport" EntitySet="HR_tbl_SummaryReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_val_sex_tbl_val_sex" Association="Self.FK_tbl_val_sex_tbl_val_sex">
+            <End Role="tbl_val_sex" EntitySet="tbl_val_sex" />
+            <End Role="tbl_val_sex1" EntitySet="tbl_val_sex" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HRSystemDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="HR_Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Int32" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="Self.FK_department" FromRole="HR_Department" ToRole="HR_tbl_Employee" />
+          <NavigationProperty Name="HR_tbl_ROP_report" Relationship="Self.FK_HR_tbl_department" FromRole="HR_Department" ToRole="HR_tbl_ROP_report" />
+          <NavigationProperty Name="HR_tbl_SummaryReport" Relationship="Self.FK_summaryDepartment" FromRole="HR_Department" ToRole="HR_tbl_SummaryReport" />
+        </EntityType>
+        <EntityType Name="HR_LeaveType">
+          <Key>
+            <PropertyRef Name="LeaveTypeID" />
+          </Key>
+          <Property Name="LeaveTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LTname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Int32" />
+          <NavigationProperty Name="HR_tbl_Emp_Leave" Relationship="HRSystemDBModel.FK_LeaveType" FromRole="HR_LeaveType" ToRole="HR_tbl_Emp_Leave" />
+          <NavigationProperty Name="HR_tbl_ApprovedLeave" Relationship="HRSystemDBModel.FK_HR_Approvedleave" FromRole="HR_LeaveType" ToRole="HR_tbl_ApprovedLeave" />
+          <NavigationProperty Name="HR_tbl_TakenLeave" Relationship="HRSystemDBModel.FK_HR_tbl_TakenLeave_HR_LeaveType" FromRole="HR_LeaveType" ToRole="HR_tbl_TakenLeave" />
+        </EntityType>
+        <EntityType Name="HR_tbl_Employee">
+          <Key>
+            <PropertyRef Name="EMP_ID" />
+          </Key>
+          <Property Name="EMP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="Int32" />
+          <Property Name="PosID" Type="Int32" />
+          <Property Name="dateJoin" Type="DateTime" Precision="0" />
+          <Property Name="dateLeave" Type="DateTime" Precision="0" />
+          <Property Name="ServiceYears" Type="Int32" />
+          <Property Name="ReportingManager" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="createdBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="modifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="isactive" Type="Int32" />
+          <NavigationProperty Name="HR_Department" Relationship="Self.FK_department" FromRole="HR_tbl_Employee" ToRole="HR_Department" />
+          <NavigationProperty Name="HR_tbl_SummaryReport" Relationship="Self.FK_Employee" FromRole="HR_tbl_Employee" ToRole="HR_tbl_SummaryReport" />
+          <NavigationProperty Name="tbl_val_sex" Relationship="Self.FK_gender" FromRole="HR_tbl_Employee" ToRole="tbl_val_sex" />
+          <NavigationProperty Name="HR_tbl_ROP_report" Relationship="Self.FK_HR_Employee" FromRole="HR_tbl_Employee" ToRole="HR_tbl_ROP_report" />
+          <NavigationProperty Name="HR_tbl_Employee1" Relationship="Self.FK_HR_Employee_Manager" FromRole="HR_tbl_Employee" ToRole="HR_tbl_Employee1" />
+          <NavigationProperty Name="HR_tbl_Employee2" Relationship="Self.FK_HR_Employee_Manager" FromRole="HR_tbl_Employee1" ToRole="HR_tbl_Employee" />
+          <NavigationProperty Name="HR_tbl_employmentStatus" Relationship="Self.FK_HR_EmployeeStatus" FromRole="HR_tbl_Employee" ToRole="HR_tbl_employmentStatus" />
+          <NavigationProperty Name="HR_tbl_Location" Relationship="Self.FK_HR_tbl_Location" FromRole="HR_tbl_Employee" ToRole="HR_tbl_Location" />
+          <NavigationProperty Name="HR_tbl_Position" Relationship="Self.FK_position" FromRole="HR_tbl_Employee" ToRole="HR_tbl_Position" />
+          <Property Name="contactID" Type="Int32" />
+          <NavigationProperty Name="HR_EmployeeContact" Relationship="HRSystemDBModel.FK_EmployeeContact" FromRole="HR_tbl_Employee" ToRole="HR_EmployeeContact" />
+          <NavigationProperty Name="HR_EmployeeContact1" Relationship="HRSystemDBModel.FK_HR_EmployeeContact_HR_tbl_Employee" FromRole="HR_tbl_Employee" ToRole="HR_EmployeeContact" />
+          <NavigationProperty Name="HR_tbl_Emp_Leave" Relationship="HRSystemDBModel.FK_EmpLeave" FromRole="HR_tbl_Employee" ToRole="HR_tbl_Emp_Leave" />
+          <NavigationProperty Name="HR_tbl_ApprovedLeave" Relationship="HRSystemDBModel.FK_HR_tbl_ApprovedLeave_HR_tbl_Employee" FromRole="HR_tbl_Employee" ToRole="HR_tbl_ApprovedLeave" />
+          <NavigationProperty Name="HR_AttendanceRegister" Relationship="HRSystemDBModel.FK_HR_AttendanceRegisterEmployee" FromRole="HR_tbl_Employee" ToRole="HR_AttendanceRegister" />
+        </EntityType>
+        <EntityType Name="HR_tbl_employmentStatus">
+          <Key>
+            <PropertyRef Name="EmpStatus_ID" />
+          </Key>
+          <Property Name="EmpStatus_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Int32" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="Self.FK_HR_EmployeeStatus" FromRole="HR_tbl_employmentStatus" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <EntityType Name="HR_tbl_Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Int32" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="Self.FK_HR_tbl_Location" FromRole="HR_tbl_Location" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <EntityType Name="HR_tbl_Position">
+          <Key>
+            <PropertyRef Name="Pos_ID" />
+          </Key>
+          <Property Name="Pos_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pos_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PositionSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="createdBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="modifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Int32" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="Self.FK_position" FromRole="HR_tbl_Position" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <EntityType Name="HR_tbl_ROP_report">
+          <Key>
+            <PropertyRef Name="ROP_ID" />
+          </Key>
+          <Property Name="ROP_ID" Type="Int32" Nullable="false" />
+          <Property Name="EmpID" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="DaysPresent" Type="Int32" />
+          <Property Name="DaysAbsent" Type="Int32" />
+          <Property Name="isactive" Type="Int32" />
+          <NavigationProperty Name="HR_Department" Relationship="Self.FK_HR_tbl_department" FromRole="HR_tbl_ROP_report" ToRole="HR_Department" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="Self.FK_HR_Employee" FromRole="HR_tbl_ROP_report" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <EntityType Name="HR_tbl_SummaryReport">
+          <Key>
+            <PropertyRef Name="Report_ID" />
+          </Key>
+          <Property Name="Report_ID" Type="Int32" Nullable="false" />
+          <Property Name="EmpId" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="SL_thismonth" Type="Int32" />
+          <Property Name="SL_broughtforward" Type="Int32" />
+          <Property Name="SL_total" Type="Int32" />
+          <Property Name="CL_thismonth" Type="Int32" />
+          <Property Name="CL_broughtforward" Type="Int32" />
+          <Property Name="CL_total" Type="Int32" />
+          <Property Name="TL_thismonth" Type="Int32" />
+          <Property Name="TL_broughtforward" Type="Int32" />
+          <Property Name="TL_total" Type="Int32" />
+          <Property Name="ML_thismonth" Type="Int32" />
+          <Property Name="ML_broughtforward" Type="Int32" />
+          <Property Name="ML_total" Type="Int32" />
+          <Property Name="remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Int32" />
+          <Property Name="confirmed" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HR_Department" Relationship="Self.FK_summaryDepartment" FromRole="HR_tbl_SummaryReport" ToRole="HR_Department" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="Self.FK_Employee" FromRole="HR_tbl_SummaryReport" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <EntityType Name="tbl_val_sex">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sex" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="Self.FK_gender" FromRole="tbl_val_sex" ToRole="HR_tbl_Employee" />
+          <NavigationProperty Name="tbl_val_sex1" Relationship="Self.FK_tbl_val_sex_tbl_val_sex" FromRole="tbl_val_sex" ToRole="tbl_val_sex1" />
+          <NavigationProperty Name="tbl_val_sex2" Relationship="Self.FK_tbl_val_sex_tbl_val_sex" FromRole="tbl_val_sex1" ToRole="tbl_val_sex" />
+        </EntityType>
+        <Association Name="FK_department">
+          <End Role="HR_Department" Type="Self.HR_Department" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_tbl_department">
+          <End Role="HR_Department" Type="Self.HR_Department" Multiplicity="0..1" />
+          <End Role="HR_tbl_ROP_report" Type="Self.HR_tbl_ROP_report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="HR_tbl_ROP_report">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_summaryDepartment">
+          <End Role="HR_Department" Type="Self.HR_Department" Multiplicity="0..1" />
+          <End Role="HR_tbl_SummaryReport" Type="Self.HR_tbl_SummaryReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="HR_tbl_SummaryReport">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_tbl_SummaryReport" Type="Self.HR_tbl_SummaryReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_SummaryReport">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_gender">
+          <End Role="tbl_val_sex" Type="Self.tbl_val_sex" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_val_sex">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_Employee">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_tbl_ROP_report" Type="Self.HR_tbl_ROP_report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_ROP_report">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_Employee_Manager">
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee1" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee1">
+              <PropertyRef Name="ReportingManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_EmployeeStatus">
+          <End Role="HR_tbl_employmentStatus" Type="Self.HR_tbl_employmentStatus" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_employmentStatus">
+              <PropertyRef Name="EmpStatus_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="Estatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_tbl_Location">
+          <End Role="HR_tbl_Location" Type="Self.HR_tbl_Location" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position">
+          <End Role="HR_tbl_Position" Type="Self.HR_tbl_Position" Multiplicity="0..1" />
+          <End Role="HR_tbl_Employee" Type="Self.HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Position">
+              <PropertyRef Name="Pos_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="PosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_val_sex_tbl_val_sex">
+          <End Role="tbl_val_sex" Type="Self.tbl_val_sex" Multiplicity="1" />
+          <End Role="tbl_val_sex1" Type="Self.tbl_val_sex" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_val_sex">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="tbl_val_sex1">
+              <PropertyRef Name="sid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HRSystemDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HR_Department" EntityType="Self.HR_Department" />
+          <EntitySet Name="HR_LeaveType" EntityType="Self.HR_LeaveType" />
+          <EntitySet Name="HR_tbl_Employee" EntityType="Self.HR_tbl_Employee" />
+          <EntitySet Name="HR_tbl_employmentStatus" EntityType="Self.HR_tbl_employmentStatus" />
+          <EntitySet Name="HR_tbl_Location" EntityType="Self.HR_tbl_Location" />
+          <EntitySet Name="HR_tbl_Position" EntityType="Self.HR_tbl_Position" />
+          <EntitySet Name="HR_tbl_ROP_report" EntityType="Self.HR_tbl_ROP_report" />
+          <EntitySet Name="HR_tbl_SummaryReport" EntityType="Self.HR_tbl_SummaryReport" />
+          <EntitySet Name="tbl_val_sex" EntityType="Self.tbl_val_sex" />
+          <AssociationSet Name="FK_department" Association="Self.FK_department">
+            <End Role="HR_Department" EntitySet="HR_Department" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_tbl_department" Association="Self.FK_HR_tbl_department">
+            <End Role="HR_Department" EntitySet="HR_Department" />
+            <End Role="HR_tbl_ROP_report" EntitySet="HR_tbl_ROP_report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_summaryDepartment" Association="Self.FK_summaryDepartment">
+            <End Role="HR_Department" EntitySet="HR_Department" />
+            <End Role="HR_tbl_SummaryReport" EntitySet="HR_tbl_SummaryReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee" Association="Self.FK_Employee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_SummaryReport" EntitySet="HR_tbl_SummaryReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_gender" Association="Self.FK_gender">
+            <End Role="tbl_val_sex" EntitySet="tbl_val_sex" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_Employee" Association="Self.FK_HR_Employee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_ROP_report" EntitySet="HR_tbl_ROP_report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_Employee_Manager" Association="Self.FK_HR_Employee_Manager">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_Employee1" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_EmployeeStatus" Association="Self.FK_HR_EmployeeStatus">
+            <End Role="HR_tbl_employmentStatus" EntitySet="HR_tbl_employmentStatus" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_tbl_Location" Association="Self.FK_HR_tbl_Location">
+            <End Role="HR_tbl_Location" EntitySet="HR_tbl_Location" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position" Association="Self.FK_position">
+            <End Role="HR_tbl_Position" EntitySet="HR_tbl_Position" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_val_sex_tbl_val_sex" Association="Self.FK_tbl_val_sex_tbl_val_sex">
+            <End Role="tbl_val_sex" EntitySet="tbl_val_sex" />
+            <End Role="tbl_val_sex1" EntitySet="tbl_val_sex" />
+          </AssociationSet>
+          <FunctionImport Name="spGetDeptAttendance">
+          <Parameter Name="deptID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetDeptAttendance1">
+            <Parameter Name="deptID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetDeptAttendance2">
+          <Parameter Name="deptID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="HR_ContactType" EntityType="HRSystemDBModel.HR_ContactType" />
+          <EntitySet Name="HR_EmployeeContact" EntityType="HRSystemDBModel.HR_EmployeeContact" />
+          <AssociationSet Name="FK_HR_EmployeeContact_HR_ContactType" Association="HRSystemDBModel.FK_HR_EmployeeContact_HR_ContactType">
+            <End Role="HR_ContactType" EntitySet="HR_ContactType" />
+            <End Role="HR_EmployeeContact" EntitySet="HR_EmployeeContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeContact" Association="HRSystemDBModel.FK_EmployeeContact">
+            <End Role="HR_EmployeeContact" EntitySet="HR_EmployeeContact" />
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_EmployeeContact_HR_tbl_Employee" Association="HRSystemDBModel.FK_HR_EmployeeContact_HR_tbl_Employee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_EmployeeContact" EntitySet="HR_EmployeeContact" />
+          </AssociationSet>
+          <EntitySet Name="HR_tbl_Emp_Leave" EntityType="HRSystemDBModel.HR_tbl_Emp_Leave" />
+          <AssociationSet Name="FK_LeaveType" Association="HRSystemDBModel.FK_LeaveType">
+            <End Role="HR_LeaveType" EntitySet="HR_LeaveType" />
+            <End Role="HR_tbl_Emp_Leave" EntitySet="HR_tbl_Emp_Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpLeave" Association="HRSystemDBModel.FK_EmpLeave">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_Emp_Leave" EntitySet="HR_tbl_Emp_Leave" />
+          </AssociationSet>
+          <FunctionImport Name="spGetDeptAttendance3">
+            <Parameter Name="deptID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetDeptAttendance4">
+          <Parameter Name="deptID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="HR_tbl_ApprovedLeave" EntityType="HRSystemDBModel.HR_tbl_ApprovedLeave" />
+          <AssociationSet Name="FK_HR_Approvedleave" Association="HRSystemDBModel.FK_HR_Approvedleave">
+            <End Role="HR_LeaveType" EntitySet="HR_LeaveType" />
+            <End Role="HR_tbl_ApprovedLeave" EntitySet="HR_tbl_ApprovedLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HR_tbl_ApprovedLeave_HR_tbl_Employee" Association="HRSystemDBModel.FK_HR_tbl_ApprovedLeave_HR_tbl_Employee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_tbl_ApprovedLeave" EntitySet="HR_tbl_ApprovedLeave" />
+          </AssociationSet>
+          <FunctionImport Name="spGetDeptAttendance5" ReturnType="Collection(HRSystemDBModel.spGetDeptAttendance5_Result)">
+          <Parameter Name="deptID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="HR_AttendanceRegister" EntityType="HRSystemDBModel.HR_AttendanceRegister" />
+          <AssociationSet Name="FK_HR_AttendanceRegisterEmployee" Association="HRSystemDBModel.FK_HR_AttendanceRegisterEmployee">
+            <End Role="HR_tbl_Employee" EntitySet="HR_tbl_Employee" />
+            <End Role="HR_AttendanceRegister" EntitySet="HR_AttendanceRegister" />
+          </AssociationSet>
+          <EntitySet Name="HR_tbl_TakenLeave" EntityType="HRSystemDBModel.HR_tbl_TakenLeave" />
+          <AssociationSet Name="FK_HR_tbl_TakenLeave_HR_LeaveType" Association="HRSystemDBModel.FK_HR_tbl_TakenLeave_HR_LeaveType">
+            <End Role="HR_LeaveType" EntitySet="HR_LeaveType" />
+            <End Role="HR_tbl_TakenLeave" EntitySet="HR_tbl_TakenLeave" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="HR_ContactType">
+          <Key>
+            <PropertyRef Name="ContactTypeID" />
+          </Key>
+          <Property Name="ContactTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HR_EmployeeContact" Relationship="HRSystemDBModel.FK_HR_EmployeeContact_HR_ContactType" FromRole="HR_ContactType" ToRole="HR_EmployeeContact" />
+        </EntityType>
+        <EntityType Name="HR_EmployeeContact">
+          <Key>
+            <PropertyRef Name="contactID" />
+          </Key>
+          <Property Name="contactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contact" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ContactTypeID" Type="Int32" Nullable="false" />
+          <Property Name="EMP_ID" Type="Int32" />
+          <NavigationProperty Name="HR_ContactType" Relationship="HRSystemDBModel.FK_HR_EmployeeContact_HR_ContactType" FromRole="HR_EmployeeContact" ToRole="HR_ContactType" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="HRSystemDBModel.FK_EmployeeContact" FromRole="HR_EmployeeContact" ToRole="HR_tbl_Employee" />
+          <NavigationProperty Name="HR_tbl_Employee1" Relationship="HRSystemDBModel.FK_HR_EmployeeContact_HR_tbl_Employee" FromRole="HR_EmployeeContact" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <Association Name="FK_HR_EmployeeContact_HR_ContactType">
+          <End Type="HRSystemDBModel.HR_ContactType" Role="HR_ContactType" Multiplicity="1" />
+          <End Type="HRSystemDBModel.HR_EmployeeContact" Role="HR_EmployeeContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_ContactType">
+              <PropertyRef Name="ContactTypeID" />
+            </Principal>
+            <Dependent Role="HR_EmployeeContact">
+              <PropertyRef Name="ContactTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeContact">
+          <End Type="HRSystemDBModel.HR_EmployeeContact" Role="HR_EmployeeContact" Multiplicity="0..1" />
+          <End Type="HRSystemDBModel.HR_tbl_Employee" Role="HR_tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_EmployeeContact">
+              <PropertyRef Name="contactID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Employee">
+              <PropertyRef Name="contactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_EmployeeContact_HR_tbl_Employee">
+          <End Type="HRSystemDBModel.HR_tbl_Employee" Role="HR_tbl_Employee" Multiplicity="0..1" />
+          <End Type="HRSystemDBModel.HR_EmployeeContact" Role="HR_EmployeeContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_EmployeeContact">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HR_tbl_Emp_Leave">
+          <Key>
+            <PropertyRef Name="EMP_ID" />
+          </Key>
+          <Property Name="EMP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpStatus_ID" Type="Int32" />
+          <Property Name="LeavetypeID" Type="Int32" />
+          <Property Name="Leave_limit" Type="Int32" />
+          <Property Name="Leave_used" Type="Int32" />
+          <Property Name="PeriodStart" Type="DateTime" Precision="0" />
+          <Property Name="PeriodEnd" Type="DateTime" Precision="0" />
+          <Property Name="isactive" Type="Int32" />
+          <NavigationProperty Name="HR_LeaveType" Relationship="HRSystemDBModel.FK_LeaveType" FromRole="HR_tbl_Emp_Leave" ToRole="HR_LeaveType" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="HRSystemDBModel.FK_EmpLeave" FromRole="HR_tbl_Emp_Leave" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <Association Name="FK_LeaveType">
+          <End Type="HRSystemDBModel.HR_LeaveType" Role="HR_LeaveType" Multiplicity="0..1" />
+          <End Type="HRSystemDBModel.HR_tbl_Emp_Leave" Role="HR_tbl_Emp_Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Emp_Leave">
+              <PropertyRef Name="LeavetypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpLeave">
+          <End Type="HRSystemDBModel.HR_tbl_Employee" Role="HR_tbl_Employee" Multiplicity="0..1" />
+          <End Type="HRSystemDBModel.HR_tbl_Emp_Leave" Role="HR_tbl_Emp_Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_Emp_Leave">
+              <PropertyRef Name="EmpStatus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HR_tbl_ApprovedLeave">
+          <Key>
+            <PropertyRef Name="ApprovedLeaveID" />
+          </Key>
+          <Property Name="ApprovedLeaveID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveFrom" Type="DateTime" Precision="0" />
+          <Property Name="Leaveto" Type="DateTime" Precision="0" />
+          <Property Name="LeavetypeID" Type="Int32" />
+          <Property Name="daterequested" Type="DateTime" Precision="0" />
+          <Property Name="recommended" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="approvedBy" Type="Int32" />
+          <Property Name="medicalrequired" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="medicalForm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Int32" />
+          <Property Name="EMP_ID" Type="Int32" />
+          <NavigationProperty Name="HR_LeaveType" Relationship="HRSystemDBModel.FK_HR_Approvedleave" FromRole="HR_tbl_ApprovedLeave" ToRole="HR_LeaveType" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="HRSystemDBModel.FK_HR_tbl_ApprovedLeave_HR_tbl_Employee" FromRole="HR_tbl_ApprovedLeave" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <Association Name="FK_HR_Approvedleave">
+          <End Type="HRSystemDBModel.HR_LeaveType" Role="HR_LeaveType" Multiplicity="0..1" />
+          <End Type="HRSystemDBModel.HR_tbl_ApprovedLeave" Role="HR_tbl_ApprovedLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="HR_tbl_ApprovedLeave">
+              <PropertyRef Name="LeavetypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HR_tbl_ApprovedLeave_HR_tbl_Employee">
+          <End Type="HRSystemDBModel.HR_tbl_Employee" Role="HR_tbl_Employee" Multiplicity="0..1" />
+          <End Type="HRSystemDBModel.HR_tbl_ApprovedLeave" Role="HR_tbl_ApprovedLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_tbl_ApprovedLeave">
+              <PropertyRef Name="approvedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spGetDeptAttendance5_Result">
+          <Property Type="Int32" Name="AttendanceID" Nullable="false" />
+          <Property Type="Int32" Name="Emp_Id" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="101" />
+          <Property Type="DateTime" Name="AttendanceDate" Nullable="false" />
+          <Property Type="DateTime" Name="TimeIN" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="TimeOUT" Nullable="true" Precision="16" />
+          <Property Type="String" Name="Absent" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="note" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="HR_AttendanceRegister">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TimeIN" Type="DateTime" Precision="0" />
+          <Property Name="TimeOUT" Type="DateTime" Precision="0" />
+          <Property Name="note" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Absent" Type="Boolean" />
+          <NavigationProperty Name="HR_tbl_Employee" Relationship="HRSystemDBModel.FK_HR_AttendanceRegisterEmployee" FromRole="HR_AttendanceRegister" ToRole="HR_tbl_Employee" />
+        </EntityType>
+        <Association Name="FK_HR_AttendanceRegisterEmployee">
+          <End Type="HRSystemDBModel.HR_tbl_Employee" Role="HR_tbl_Employee" Multiplicity="1" />
+          <End Type="HRSystemDBModel.HR_AttendanceRegister" Role="HR_AttendanceRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_tbl_Employee">
+              <PropertyRef Name="EMP_ID" />
+            </Principal>
+            <Dependent Role="HR_AttendanceRegister">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HR_tbl_TakenLeave">
+          <Key>
+            <PropertyRef Name="TakenLeaveID" />
+          </Key>
+          <Property Name="TakenLeaveID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeaveTypeID" Type="Int32" />
+          <Property Name="isactive" Type="Int32" />
+          <Property Name="EMP_ID" Type="Int32" />
+          <Property Name="start_date" Type="DateTime" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Precision="3" />
+          <Property Name="LeaveDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HR_LeaveType" Relationship="HRSystemDBModel.FK_HR_tbl_TakenLeave_HR_LeaveType" FromRole="HR_tbl_TakenLeave" ToRole="HR_LeaveType" />
+        </EntityType>
+        <Association Name="FK_HR_tbl_TakenLeave_HR_LeaveType">
+          <End Type="HRSystemDBModel.HR_LeaveType" Role="HR_LeaveType" Multiplicity="0..1" />
+          <End Type="HRSystemDBModel.HR_tbl_TakenLeave" Role="HR_tbl_TakenLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HR_LeaveType">
+              <PropertyRef Name="LeaveTypeID" />
+            </Principal>
+            <Dependent Role="HR_tbl_TakenLeave">
+              <PropertyRef Name="LeaveTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HRSystemDBModelStoreContainer" CdmEntityContainer="HRSystemDBEntities">
+          <EntitySetMapping Name="HR_Department">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_Department">
+              <MappingFragment StoreEntitySet="HR_Department">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_LeaveType">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_LeaveType">
+              <MappingFragment StoreEntitySet="HR_LeaveType">
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+                <ScalarProperty Name="LTname" ColumnName="LTname" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_Employee">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_Employee">
+              <MappingFragment StoreEntitySet="HR_tbl_Employee">
+                <ScalarProperty Name="contactID" ColumnName="contactID" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="PosID" ColumnName="PosID" />
+                <ScalarProperty Name="dateJoin" ColumnName="dateJoin" />
+                <ScalarProperty Name="dateLeave" ColumnName="dateLeave" />
+                <ScalarProperty Name="ServiceYears" ColumnName="ServiceYears" />
+                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_employmentStatus">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_employmentStatus">
+              <MappingFragment StoreEntitySet="HR_tbl_employmentStatus">
+                <ScalarProperty Name="EmpStatus_ID" ColumnName="EmpStatus_ID" />
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_Location">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_Location">
+              <MappingFragment StoreEntitySet="HR_tbl_Location">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_Position">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_Position">
+              <MappingFragment StoreEntitySet="HR_tbl_Position">
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+                <ScalarProperty Name="Pos_Name" ColumnName="Pos_Name" />
+                <ScalarProperty Name="PositionSalary" ColumnName="PositionSalary" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_ROP_report">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_ROP_report">
+              <MappingFragment StoreEntitySet="HR_tbl_ROP_report">
+                <ScalarProperty Name="ROP_ID" ColumnName="ROP_ID" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DaysPresent" ColumnName="DaysPresent" />
+                <ScalarProperty Name="DaysAbsent" ColumnName="DaysAbsent" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_SummaryReport">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_SummaryReport">
+              <MappingFragment StoreEntitySet="HR_tbl_SummaryReport">
+                <ScalarProperty Name="Report_ID" ColumnName="Report_ID" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SL_thismonth" ColumnName="SL_thismonth" />
+                <ScalarProperty Name="SL_broughtforward" ColumnName="SL_broughtforward" />
+                <ScalarProperty Name="SL_total" ColumnName="SL_total" />
+                <ScalarProperty Name="CL_thismonth" ColumnName="CL_thismonth" />
+                <ScalarProperty Name="CL_broughtforward" ColumnName="CL_broughtforward" />
+                <ScalarProperty Name="CL_total" ColumnName="CL_total" />
+                <ScalarProperty Name="TL_thismonth" ColumnName="TL_thismonth" />
+                <ScalarProperty Name="TL_broughtforward" ColumnName="TL_broughtforward" />
+                <ScalarProperty Name="TL_total" ColumnName="TL_total" />
+                <ScalarProperty Name="ML_thismonth" ColumnName="ML_thismonth" />
+                <ScalarProperty Name="ML_broughtforward" ColumnName="ML_broughtforward" />
+                <ScalarProperty Name="ML_total" ColumnName="ML_total" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+                <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_val_sex">
+            <EntityTypeMapping TypeName="HRSystemDBModel.tbl_val_sex">
+              <MappingFragment StoreEntitySet="tbl_val_sex">
+                <ScalarProperty Name="sid" ColumnName="sid" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_ContactType">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_ContactType">
+              <MappingFragment StoreEntitySet="HR_ContactType">
+                <ScalarProperty Name="ContactTypeName" ColumnName="ContactTypeName" />
+                <ScalarProperty Name="ContactTypeID" ColumnName="ContactTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_EmployeeContact">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_EmployeeContact">
+              <MappingFragment StoreEntitySet="HR_EmployeeContact">
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="ContactTypeID" ColumnName="ContactTypeID" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="contactID" ColumnName="contactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_Emp_Leave">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_Emp_Leave">
+              <MappingFragment StoreEntitySet="HR_tbl_Emp_Leave">
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+                <ScalarProperty Name="PeriodEnd" ColumnName="PeriodEnd" />
+                <ScalarProperty Name="PeriodStart" ColumnName="PeriodStart" />
+                <ScalarProperty Name="Leave_used" ColumnName="Leave_used" />
+                <ScalarProperty Name="Leave_limit" ColumnName="Leave_limit" />
+                <ScalarProperty Name="LeavetypeID" ColumnName="LeavetypeID" />
+                <ScalarProperty Name="EmpStatus_ID" ColumnName="EmpStatus_ID" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_ApprovedLeave">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_ApprovedLeave">
+              <MappingFragment StoreEntitySet="HR_tbl_ApprovedLeave">
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+                <ScalarProperty Name="medicalForm" ColumnName="medicalForm" />
+                <ScalarProperty Name="medicalrequired" ColumnName="medicalrequired" />
+                <ScalarProperty Name="approvedBy" ColumnName="approvedBy" />
+                <ScalarProperty Name="recommended" ColumnName="recommended" />
+                <ScalarProperty Name="daterequested" ColumnName="daterequested" />
+                <ScalarProperty Name="LeavetypeID" ColumnName="LeavetypeID" />
+                <ScalarProperty Name="Leaveto" ColumnName="Leaveto" />
+                <ScalarProperty Name="LeaveFrom" ColumnName="LeaveFrom" />
+                <ScalarProperty Name="ApprovedLeaveID" ColumnName="ApprovedLeaveID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetDeptAttendance5" FunctionName="HRSystemDBModel.Store.spGetDeptAttendance">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRSystemDBModel.spGetDeptAttendance5_Result">
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+                <ScalarProperty Name="TimeIN" ColumnName="TimeIN" />
+                <ScalarProperty Name="TimeOUT" ColumnName="TimeOUT" />
+                <ScalarProperty Name="Absent" ColumnName="Absent" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="HR_AttendanceRegister">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_AttendanceRegister">
+              <MappingFragment StoreEntitySet="HR_AttendanceRegister">
+                <ScalarProperty Name="Absent" ColumnName="Absent" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="TimeOUT" ColumnName="TimeOUT" />
+                <ScalarProperty Name="TimeIN" ColumnName="TimeIN" />
+                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_tbl_TakenLeave">
+            <EntityTypeMapping TypeName="HRSystemDBModel.HR_tbl_TakenLeave">
+              <MappingFragment StoreEntitySet="HR_tbl_TakenLeave">
+                <ScalarProperty Name="LeaveDate" ColumnName="LeaveDate" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+                <ScalarProperty Name="TakenLeaveID" ColumnName="TakenLeaveID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

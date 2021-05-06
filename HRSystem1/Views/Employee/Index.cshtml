@@ -1,0 +1,135 @@
+﻿@model IEnumerable<HRSystem1.Models.HR_tbl_Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contactext)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateJoin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceYears)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createdBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.createDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isactive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HR_Department.DepartmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_val_sex.sex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HR_tbl_Employee2.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HR_tbl_employmentStatus.estatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HR_tbl_Location.LocationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HR_tbl_Position.Pos_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contactext)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateJoin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceYears)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createdBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.createDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isactive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HR_Department.DepartmentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_val_sex.sex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HR_tbl_Employee2.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HR_tbl_employmentStatus.estatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HR_tbl_Location.LocationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HR_tbl_Position.Pos_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EMP_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EMP_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EMP_ID })
+        </td>
+    </tr>
+}
+
+</table>

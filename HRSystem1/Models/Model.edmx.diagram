@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4006d3e3bcb44c0b8f027e7a4d7c13b5" Name="Diagram1">
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_Department" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_LeaveType" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_Employee" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_employmentStatus" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_Location" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_Position" Width="1.5" PointX="0.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_ROP_report" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_SummaryReport" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRSystemDBModel.tbl_val_sex" Width="1.5" PointX="0.75" PointY="20" IsExpanded="true" />
+        <AssociationConnector Association="HRSystemDBModel.FK_department" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_tbl_department" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_summaryDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_gender" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_Employee_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_EmployeeStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_tbl_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_position" ManuallyRouted="false" />
+        <AssociationConnector Association="HRSystemDBModel.FK_tbl_val_sex_tbl_val_sex" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_ContactType" Width="1.5" PointX="3" PointY="17.375" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_EmployeeContact" Width="1.5" PointX="5.25" PointY="11" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_EmployeeContact_HR_ContactType" />
+        <AssociationConnector Association="HRSystemDBModel.FK_EmployeeContact" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_EmployeeContact_HR_tbl_Employee" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_Emp_Leave" Width="1.5" PointX="5.25" PointY="6.75" />
+        <AssociationConnector Association="HRSystemDBModel.FK_LeaveType" />
+        <AssociationConnector Association="HRSystemDBModel.FK_EmpLeave" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_ApprovedLeave" Width="1.5" PointX="8.25" PointY="9.5" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_Approvedleave" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_tbl_ApprovedLeave_HR_tbl_Employee" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_AttendanceRegister" Width="1.5" PointX="5.25" PointY="18.625" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_AttendanceRegisterEmployee" />
+        <EntityTypeShape EntityType="HRSystemDBModel.HR_tbl_TakenLeave" Width="1.5" PointX="5.25" PointY="2.5" />
+        <AssociationConnector Association="HRSystemDBModel.FK_HR_tbl_TakenLeave_HR_LeaveType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

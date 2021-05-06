@@ -1,0 +1,276 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .dataTables_wrapper {
+        width: 100% !important;
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+
+<div class="jumbotron">
+    <h1>HRMS</h1>
+    <p class="lead">Welcome to Human Resource Mangement System.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+@*<div class="row w-100 p-3">*@
+<div>
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3 id="totalNumberOfEmployees">33</h3>
+
+                    <p >Total # of Employees</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3 id="percentagePresentCount">90<sup style="font-size: 20px">%</sup></h3>
+
+                    <p>Present Today</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3 id="holidayCount">15</h3>
+
+                    <p>Upcoming Holidays</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3 id="absentNumOfEmployees">5</h3>
+
+                    <p>Absent Today</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+</div>
+<div style="display:flex;justify-content:flex-end" class="row w-100 p-3">
+
+    @*<button class="btn btn-primary" id="btnOpenAttendanceModal" name="btnOpenAttendanceModal"> Add Attendance</button>*@
+
+
+</div>
+<div class="row w-100 p-3">
+    <div style="width:100%; margin:0">
+        <table id="table_id" class="display table" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>Row 1 Data 1</td>
+                    <td>Row 1 Data 2</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Row 2 Data 1</td>
+                    <td>Row 2 Data 2</td>
+                    <td></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!----->
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="email">Cheese:</label>
+                    <select name="ingredients[]" id="ingredients" multiple="multiple">
+                        <option value="cheese1">Cheese</option>
+                        <option value="tomatoes1">Tomatoes</option>
+                        <option value="mozarella1">Mozzarella</option>
+                        <option value="mushrooms1">Mushrooms</option>
+                        <option value="pepperoni1">Pepperoni</option>
+                        <option value="onions1">Onions</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal-->
+<div class="modal fade" id="errorModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+
+        $('#table_id').DataTable({
+            "ajax": {
+                "url": "/Employee/GetEmployees",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "EmployeeID" },
+                { "data": "FirstName" },
+                { "data": "LastName" },
+                {
+                    'data': null,
+                    className: 'center',
+                    // defaultContent: '<a id="lnkEdit" href="" class="editor_edit">Edit</a> / <a href="" class="editor_remove">Delete</a>'
+                    defaultContent: '<button id="lnkEdit" type="button" class="btn btn-primary">Edit</button>'
+                }
+            ]
+
+        });
+        //edit click
+        $('#example tbody').on('click', 'button', function () {
+            var data = table.row($(this).parents('tr')).data();
+            alert(data[0] + "'s salary is: " + data[5]);
+        });
+        //$(".editor_edit").click(function (e) {
+        //    e.preventDefault();
+        //    alert('Edit clicked');
+        //});
+        //click
+        $("#btnOpenAttendanceModal").click(function () {
+            alert("button");
+        });
+        //update button
+        //$("#btnUpdateRecord").click(function () {
+        //    alert("Update Button");
+        //});
+        //load employess from  db
+        debugger;
+       
+        getDashBoardData();
+    });
+
+</script>
+<script>
+    function showToast(message) {
+        $(".modal-header").first().text("Alert").css("font-weight", "bold");
+        $(".modal-body").first().text(message).css("font-weight", "bold");
+
+        $('#myModal').modal('show');
+    }
+    function getDashBoardData() {
+        debugger;
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            
+            url: "/Employee/GetEmployeesDashboardData",
+            success: function (result) {
+                debugger;
+                if (result.success === true) {
+                    console.log('Success');
+                    console.log(result.data.total, result.data.employeesPresent, result.data.holidayCount, result.data.employeesAbsent);
+                    $("#totalNumberOfEmployees").text(result.data.total);
+                    //percentagePresentCount
+                    let numPresent = result.data.employeesPresent;
+                    numPresent = (parseInt(result.data.employeesAbsent));
+                    $("#percentagePresentCount").text(numPresent);
+                    $("#absentNumOfEmployees").text(result.data.employeesAbsent);
+                    if (parseInt(result.data.employeesPresent) && parseInt(result.data.employeesAbsent)) {
+                        debugger;
+                        //let numPresent = (parseInt(result.data.employeesPresent) - parseInt(result.data.employeesAbsent));
+                        //let numPresent = result.data.employeesPresent;
+                        //numPresent = (parseInt(result.data.employeesAbsent) ) ;
+                        //$("#percentagePresentCount").text(numPresent);
+                        //$("#absentNumOfEmployees").text(result.data.employeesAbsent);
+                    }
+                } else {
+                    console.log('Error')
+                    alert(result.message);
+                }
+            },
+            failure: function (response) {
+                alert('Failure');
+                alert(response.responseText);
+            }, 
+            error: function () {
+                debugger;
+                console.log(xhr.responseText);
+                var myJSON = JSON.parse(JSON.stringify(xhr.responseText));
+                console.log(myJSON);
+                alert("Error has occurred..Please try again");
+                hasErrors = false;
+                showToast(myJSON.message);
+            }
+
+        });
+    }
+</script>
